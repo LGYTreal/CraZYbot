@@ -35,7 +35,7 @@ module.exports = {
       const webhook = await getOrCreateWebhook(interaction.channel);
 
       // Delete the slash command response (it's ephemeral anyway)
-      await interaction.reply({ content: '😈 Impersonation deployed!', ephemeral: true });
+      await interaction.editReply({ content });
 
       await webhook.send({
         content: messageText,
@@ -44,7 +44,7 @@ module.exports = {
       });
     } catch (err) {
       console.error('Impersonate error:', err);
-      await interaction.reply({
+      await interaction.editReply({
         content: '❌ Failed to impersonate. Make sure I have **Manage Webhooks** permission!',
         ephemeral: true,
       });

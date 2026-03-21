@@ -40,7 +40,7 @@ module.exports = {
     const color = interaction.options.getString('color');
 
     const output = color === 'rainbow' ? rainbowText(text) : colorText(text, color);
-    await interaction.reply(`🎨 **${interaction.user.username}** says:\n${output}`);
+    await interaction.editReply(`🎨 **${interaction.user.username}** says:\n${output}`);
   },
 
   async executePrefix(message, args) {

@@ -14,7 +14,7 @@ module.exports = {
     .setDescription('🏓 Check the bot latency and API ping.'),
 
   async execute(interaction) {
-    const sent = await interaction.reply({ content: '🏓 Pinging...', fetchReply: true });
+    const sent = await interaction.editReply({ content: '🏓 Pinging...', fetchReply: true });
     const roundtrip = sent.createdTimestamp - interaction.createdTimestamp;
     const apiPing = interaction.client.ws.ping;
 

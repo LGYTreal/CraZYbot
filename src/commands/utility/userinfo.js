@@ -43,7 +43,7 @@ module.exports = {
       .setFooter({ text: `Requested by ${interaction.user.username}` })
       .setTimestamp();
 
-    await interaction.reply({ embeds: [embed] });
+    await interaction.editReply({ embeds: [embed] });
   },
 
   async executePrefix(message, args) {

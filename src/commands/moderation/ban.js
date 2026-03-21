@@ -52,10 +52,10 @@ module.exports = {
         .setThumbnail(target.user.displayAvatarURL())
         .setTimestamp();
 
-      await interaction.reply({ embeds: [embed] });
+      await interaction.editReply({ embeds: [embed] });
     } catch (err) {
       console.error('Ban error:', err);
-      await interaction.reply({ content: '❌ Failed to ban that user.', ephemeral: true });
+      await interaction.editReply({ content });
     }
   },
 

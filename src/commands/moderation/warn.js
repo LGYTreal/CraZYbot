@@ -75,7 +75,7 @@ module.exports = {
 
   async execute(interaction) {
     if (!interaction.member.permissions.has(PermissionFlagsBits.ModerateMembers)) {
-      return interaction.reply({ content: '❌ You need **Moderate Members** permission!', ephemeral: true });
+      return interaction.editReply({ content: '❌ You need **Moderate Members** permission!' });
     }
 
     const sub = interaction.options.getSubcommand();
@@ -105,7 +105,7 @@ module.exports = {
         ).catch(() => {});
       }
 
-      await interaction.reply({ embeds: [embed] });
+      await interaction.editReply({ embeds: [embed] });
     } else if (sub === 'list') {
       const userWarnings = getWarnings(interaction.guild.id, target.id);
 
@@ -125,10 +125,10 @@ module.exports = {
         );
       }
 
-      await interaction.reply({ embeds: [embed] });
+      await interaction.editReply({ embeds: [embed] });
     } else if (sub === 'clear') {
       clearWarnings(interaction.guild.id, target.id);
-      await interaction.reply({
+      await interaction.editReply({
         embeds: [
           new EmbedBuilder()
             .setColor(0x00FF7F)

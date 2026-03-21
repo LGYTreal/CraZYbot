@@ -47,9 +47,9 @@ module.exports = {
         .setThumbnail(target.user.displayAvatarURL())
         .setTimestamp();
 
-      await interaction.reply({ embeds: [embed] });
+      await interaction.editReply({ embeds: [embed] });
     } catch (err) {
-      await interaction.reply({ content: '❌ Failed to kick that user.', ephemeral: true });
+      await interaction.editReply({ content });
     }
   },
 

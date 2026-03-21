@@ -47,7 +47,7 @@ module.exports = {
       .setFooter({ text: `Poll by ${interaction.user.username} • Ends in ${duration} min` })
       .setTimestamp(Date.now() + duration * 60 * 1000);
 
-    await interaction.reply({ embeds: [embed] });
+    await interaction.editReply({ embeds: [embed] });
     const msg = await interaction.fetchReply();
 
     // Add reactions for voting
