@@ -236,4 +236,4 @@ Drop the file in `src/commands/fun/`, `moderation/`, or `utility/` and run `npm 
 
 ---
 
-*Built with ❤️ and CraZY energy by CraZYbot*
+*Built with ❤️ and CraZY energy by LifeguardYT*

@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Client, GatewayIntentBits, Collection, Partials } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 
 // =============================================
 //   CraZYbot — Main Entry Point 🎉
@@ -56,5 +57,10 @@ for (const file of eventFiles) {
     client.on(event.name, (...args) => event.execute(...args, client));
   }
 }
+
+// ── Keep Leapcell happy — it expects an HTTP server on port 3000 ───────────
+http.createServer((req, res) => res.end('CraZYbot is running! 🎉')).listen(3000, () => {
+  console.log('🌐 HTTP keepalive server listening on port 3000');
+});
 
 client.login(process.env.DISCORD_TOKEN);
