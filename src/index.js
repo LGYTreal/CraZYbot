@@ -58,9 +58,12 @@ for (const file of eventFiles) {
   }
 }
 
-// ── Keep Leapcell happy — it expects an HTTP server on port 3000 ───────────
-http.createServer((req, res) => res.end('CraZYbot is running! 🎉')).listen(3000, () => {
-  console.log('🌐 HTTP keepalive server listening on port 3000');
+// ── Login first, then start HTTP keepalive ─────────────────────────────────
+client.login(process.env.DISCORD_TOKEN).then(() => {
+  http.createServer((req, res) => res.end('CraZYbot is running! 🎉')).listen(3000, () => {
+    console.log('🌐 HTTP keepalive server listening on port 3000');
+  });
+}).catch(err => {
+  console.error('❌ Failed to login:', err);
+  process.exit(1);
 });
-
-client.login(process.env.DISCORD_TOKEN);
