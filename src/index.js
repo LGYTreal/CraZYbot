@@ -60,9 +60,18 @@ for (const file of eventFiles) {
 
 // ── Login first, then start HTTP keepalive ─────────────────────────────────
 client.login(process.env.DISCORD_TOKEN).then(() => {
-  http.createServer((req, res) => res.end('CraZYbot is running! 🎉')).listen(3000, () => {
+  const server = http.createServer((req, res) => res.end('CraZYbot is running! 🎉'));
+  server.listen(3000, () => {
     console.log('🌐 HTTP keepalive server listening on port 3000');
   });
+
+  // Self-ping every 4 minutes to prevent Leapcell from sleeping
+  setInterval(() => {
+    http.get('http://127.0.0.1:3000', (res) => {
+      console.log('💓 Keepalive ping sent');
+    }).on('error', () => {});
+  }, 4 * 60 * 1000);
+
 }).catch(err => {
   console.error('❌ Failed to login:', err);
   process.exit(1);
