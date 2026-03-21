@@ -7,10 +7,15 @@ const { Collection } = require('discord.js');
 module.exports = {
   name: 'interactionCreate',
   async execute(interaction, client) {
+    console.log(`📨 Interaction received: type=${interaction.type} user=${interaction.user.username} command=${interaction.commandName ?? 'N/A'}`);
+
     if (!interaction.isChatInputCommand()) return;
 
     const command = client.slashCommands.get(interaction.commandName);
-    if (!command) return;
+    if (!command) {
+      console.log(`❌ Unknown command: ${interaction.commandName}`);
+      return;
+    }
 
     // Cooldown handling
     if (!client.cooldowns.has(command.data.name)) {
@@ -35,7 +40,9 @@ module.exports = {
     setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
 
     try {
+      console.log(`⚡ Executing command: /${command.data.name}`);
       await command.execute(interaction, client);
+      console.log(`✅ Command executed: /${command.data.name}`);
     } catch (error) {
       console.error(`❌ Error in /${command.data.name}:`, error);
       const msg = { content: '💥 Something exploded! The bot is *too crazy* for that command.', ephemeral: true };
